@@ -3,7 +3,7 @@ Theme Name: UAE Equipment Rental
 Theme URI: https://uaeequipmentrental.ae
 Author: Codex
 Description: Mobile-first WordPress theme for UAE bobcat and CAT 226B skid steer loader rental, built from the project SRS.
-Version: 1.1.3
+Version: 1.1.6
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.1
@@ -2126,12 +2126,22 @@ html[dir="rtl"] .cky-notice-btn-wrapper {
   }
 }
 
-/* Mobile navigation must escape the sticky header and sit above the hero. */
+/* Mobile navigation: polished off-canvas drawer. */
+.nav-backdrop {
+  display: none;
+}
+
 @media (max-width: 900px) {
+  html.nav-open,
+  html.nav-open body {
+    overflow: hidden;
+  }
+
   .site-header {
     min-height: 64px;
     align-items: center;
     overflow: visible;
+    z-index: 1003;
   }
 
   .brand {
@@ -2140,69 +2150,135 @@ html[dir="rtl"] .cky-notice-btn-wrapper {
 
   .nav-toggle {
     position: relative;
-    z-index: 1002;
-    display: grid;
-    place-items: center;
+    z-index: 1004;
+    display: block;
     width: 44px;
     height: 44px;
+    padding: 0;
     border: 1px solid var(--erc-app-border, #e5e7eb);
     border-radius: 6px;
     background: #fff;
   }
 
-  .site-nav {
+  .nav-toggle span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 22px;
+    height: 2px;
+    margin: 0;
+    background: var(--erc-text-title, #111827);
+    transform-origin: center;
+    transition: transform 0.18s ease, opacity 0.14s ease;
+  }
+
+  .nav-toggle span:nth-child(1) {
+    transform: translate(-50%, -8px);
+  }
+
+  .nav-toggle span:nth-child(2) {
+    transform: translate(-50%, -50%);
+  }
+
+  .nav-toggle span:nth-child(3) {
+    transform: translate(-50%, 6px);
+  }
+
+  .nav-toggle.is-open span:nth-child(1) {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.is-open span:nth-child(3) {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  .nav-backdrop {
     position: fixed;
-    z-index: 1001;
-    top: 64px;
-    left: 0;
-    right: 0;
+    inset: 0;
+    z-index: 1000;
     display: none;
     width: 100vw;
-    max-height: calc(100vh - 64px);
-    overflow-y: auto;
-    padding: 0.75rem 1rem 1rem;
+    height: 100vh;
     border: 0;
-    border-top: 1px solid var(--erc-app-border, var(--line));
-    border-bottom: 1px solid var(--erc-app-border, var(--line));
+    background: rgba(15, 23, 42, 0.48);
+    backdrop-filter: blur(2px);
+  }
+
+  .nav-backdrop.is-open {
+    display: block;
+  }
+
+  .nav-backdrop[hidden] {
+    display: none !important;
+  }
+
+  .site-nav {
+    position: fixed;
+    z-index: 1002;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    display: grid;
+    align-content: start !important;
+    gap: 0.85rem;
+    width: min(78vw, 360px);
+    height: 100vh;
+    max-height: none;
+    overflow-y: auto;
+    padding: 5.1rem 1rem 1rem;
+    border: 0;
+    border-left: 1px solid var(--erc-app-border, var(--line));
     border-radius: 0;
     background: #fff;
-    box-shadow: 0 22px 45px rgba(15, 23, 42, 0.18);
+    box-shadow: -22px 0 45px rgba(15, 23, 42, 0.22);
+    opacity: 0;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.22s ease, opacity 0.18s ease, visibility 0.18s ease;
   }
 
   .site-nav.is-open {
     display: grid;
-    gap: 0.7rem;
+    opacity: 1;
+    transform: translateX(0);
+    visibility: visible;
   }
 
   .site-nav ul {
     display: grid;
-    gap: 0;
+    gap: 0.38rem;
     width: 100%;
     padding: 0;
-    border: 1px solid var(--erc-app-border, #e5e7eb);
-    border-radius: 8px;
+    border: 0;
+    border-radius: 0;
     overflow: hidden;
-    background: #fff;
+    background: transparent;
   }
 
   .site-nav li + li {
-    border-top: 1px solid var(--erc-app-border, #e5e7eb);
+    border-top: 0;
   }
 
   .site-nav a,
   .site-nav .nav-cta {
     display: flex;
     width: 100%;
-    min-height: 48px;
+    min-height: 46px;
     align-items: center;
-    justify-content: flex-start;
-    padding: 0.78rem 0.9rem;
-    border-radius: 0;
+    justify-content: center;
+    padding: 0.65rem 0.8rem;
+    border-radius: 6px;
     color: var(--erc-text-title, #111827);
-    font-size: 0.96rem;
+    font-size: 1rem;
     font-weight: 700;
     line-height: 1.25;
-    text-align: start;
+    text-align: center;
   }
 
   .site-nav a:hover {
@@ -2210,6 +2286,7 @@ html[dir="rtl"] .cky-notice-btn-wrapper {
   }
 
   .site-nav .nav-cta {
+    margin-top: 0.15rem;
     justify-content: center;
     min-height: 48px;
     border: 1px solid var(--yellow);
@@ -2221,6 +2298,7 @@ html[dir="rtl"] .cky-notice-btn-wrapper {
   .site-nav .language-switcher {
     justify-self: stretch;
     width: 100%;
+    margin-top: 0.3rem;
     padding: 0.25rem;
     border-radius: 8px;
   }
@@ -2230,28 +2308,47 @@ html[dir="rtl"] .cky-notice-btn-wrapper {
     min-height: 38px;
     border-radius: 6px;
     justify-content: center;
+    text-align: center;
     font-size: 0.82rem;
+  }
+
+  html[dir="rtl"] .site-nav {
+    right: auto;
+    left: 0;
+    border-right: 1px solid var(--erc-app-border, var(--line));
+    border-left: 0;
+    box-shadow: 22px 0 45px rgba(15, 23, 42, 0.22);
+    transform: translateX(-100%);
+  }
+
+  html[dir="rtl"] .site-nav.is-open {
+    transform: translateX(0);
   }
 
   html[dir="rtl"] .site-nav a,
   html[dir="rtl"] .site-nav .nav-cta {
-    justify-content: flex-end;
-    text-align: right;
+    justify-content: center;
+    text-align: center;
   }
 
   html[dir="rtl"] .site-nav .nav-cta {
     justify-content: center;
   }
 
+  html[dir="rtl"] .site-nav .language-switcher a {
+    justify-content: center;
+    text-align: center;
+  }
+
   body.admin-bar .site-nav {
-    top: 110px;
-    max-height: calc(100vh - 110px);
+    padding-top: 6.4rem;
   }
 }
 
 @media (max-width: 520px) {
   .site-nav {
-    padding-right: 0.75rem;
-    padding-left: 0.75rem;
+    width: min(86vw, 340px);
+    padding-right: 0.85rem;
+    padding-left: 0.85rem;
   }
 }

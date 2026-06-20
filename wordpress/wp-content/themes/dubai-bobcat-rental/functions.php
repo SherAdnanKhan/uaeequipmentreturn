@@ -26,8 +26,8 @@ function dbr_setup() {
 add_action( 'after_setup_theme', 'dbr_setup' );
 
 function dbr_enqueue_assets() {
-	wp_enqueue_style( 'dbr-style', get_stylesheet_uri(), array(), '1.1.3' );
-	wp_enqueue_script( 'dbr-script', get_template_directory_uri() . '/assets/site.js', array(), '1.1.3', true );
+	wp_enqueue_style( 'dbr-style', get_stylesheet_uri(), array(), '1.1.6' );
+	wp_enqueue_script( 'dbr-script', get_template_directory_uri() . '/assets/site.js', array(), '1.1.6', true );
 	wp_localize_script(
 		'dbr-script',
 		'dbrBusiness',
@@ -38,6 +38,8 @@ function dbr_enqueue_assets() {
 				'intro'   => dbr_text( 'Hello, I need a CAT 226B bobcat rental quote in the UAE.', 'مرحبا، أحتاج عرض سعر لتأجير بوبكات CAT 226B في الإمارات.' ),
 				'invalid' => dbr_text( 'Please add name, phone, job location and service before sending.', 'يرجى إضافة الاسم ورقم الهاتف وموقع العمل ونوع الخدمة قبل الإرسال.' ),
 				'opening' => dbr_text( 'Opening WhatsApp with your quote details.', 'سيتم فتح واتساب مع تفاصيل طلب السعر.' ),
+				'openMenu'=> dbr_text( 'Open menu', 'فتح القائمة' ),
+				'closeMenu'=> dbr_text( 'Close menu', 'إغلاق القائمة' ),
 				'name'    => dbr_text( 'Name', 'الاسم' ),
 				'phone'   => dbr_text( 'Phone', 'الهاتف' ),
 				'wa'      => dbr_text( 'WhatsApp', 'واتساب' ),
@@ -145,6 +147,8 @@ add_action( 'template_redirect', 'dbr_redirect_legacy_paths' );
 function dbr_get_ar_translations() {
 	return array(
 		'Language switcher' => 'مبدل اللغة',
+		'Open menu' => 'فتح القائمة',
+		'Close menu' => 'إغلاق القائمة',
 		'Skip to content' => 'تخطي إلى المحتوى',
 		'CAT 226B bobcat with operator' => 'بوبكات CAT 226B مع مشغل',
 		'Primary navigation' => 'القائمة الرئيسية',

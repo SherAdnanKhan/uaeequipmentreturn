@@ -21,11 +21,12 @@
 			<small><?php esc_html_e( 'CAT 226B bobcat with operator', 'dubai-bobcat-rental' ); ?></small>
 		</span>
 	</a>
-	<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+	<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="<?php esc_attr_e( 'Open menu', 'dubai-bobcat-rental' ); ?>">
 		<span></span>
 		<span></span>
 		<span></span>
 	</button>
+	<button class="nav-backdrop" type="button" aria-label="<?php esc_attr_e( 'Close menu', 'dubai-bobcat-rental' ); ?>" hidden></button>
 	<nav id="site-nav" class="site-nav" aria-label="<?php esc_attr_e( 'Primary navigation', 'dubai-bobcat-rental' ); ?>">
 		<ul id="menu-primary-navigation" class="menu dbr-primary-menu">
 			<?php foreach ( dbr_primary_nav_items() as $nav_item ) : ?>

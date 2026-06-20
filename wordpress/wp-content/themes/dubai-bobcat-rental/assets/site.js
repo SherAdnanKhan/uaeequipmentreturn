@@ -1,26 +1,43 @@
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector("#site-nav");
+const navBackdrop = document.querySelector(".nav-backdrop");
 
-navToggle?.addEventListener("click", () => {
+const setNavOpen = (isOpen) => {
   if (!siteNav) {
     return;
   }
 
-  const isOpen = siteNav.classList.toggle("is-open");
-  navToggle.setAttribute("aria-expanded", String(isOpen));
+  const labels = window.dbrBusiness?.messages || {};
+
+  siteNav.classList.toggle("is-open", isOpen);
+  navToggle?.classList.toggle("is-open", isOpen);
+  navToggle?.setAttribute("aria-expanded", String(isOpen));
+  navToggle?.setAttribute("aria-label", isOpen ? (labels.closeMenu || "Close menu") : (labels.openMenu || "Open menu"));
+  navBackdrop?.classList.toggle("is-open", isOpen);
+  document.documentElement.classList.toggle("nav-open", isOpen);
+
+  if (navBackdrop) {
+    navBackdrop.hidden = !isOpen;
+  }
+};
+
+navToggle?.addEventListener("click", () => {
+  setNavOpen(!siteNav?.classList.contains("is-open"));
+});
+
+navBackdrop?.addEventListener("click", () => {
+  setNavOpen(false);
 });
 
 siteNav?.addEventListener("click", (event) => {
   if (event.target instanceof Element && event.target.closest("a")) {
-    siteNav.classList.remove("is-open");
-    navToggle?.setAttribute("aria-expanded", "false");
+    setNavOpen(false);
   }
 });
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && siteNav?.classList.contains("is-open")) {
-    siteNav.classList.remove("is-open");
-    navToggle?.setAttribute("aria-expanded", "false");
+    setNavOpen(false);
     navToggle?.focus();
   }
 });
