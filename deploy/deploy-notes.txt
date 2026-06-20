@@ -1,0 +1,80 @@
+UAE Equipment Rental WordPress Deployment Notes
+
+Local deploy files:
+- deploy/uae-equipment-rental-theme.zip
+- deploy/uae-equipment-rental-production.sql
+- deploy/uae-equipment-rental-deploy-package.zip
+
+Target domain:
+- https://uaeequipmentrental.ae
+
+Important:
+- Your cPanel already has WordPress installed in public_html.
+- Do not upload/replace wp-admin, wp-includes, or the whole local wordpress folder.
+- Upload only the custom theme zip, then import the database/content.
+- The deploy package zip is only a convenience bundle. If you use it, extract it first and then use the theme zip and SQL file inside it.
+- Do not upload uae-equipment-rental-deploy-package.zip directly as a WordPress theme.
+
+1. Backup the current live WordPress
+- In cPanel, open phpMyAdmin.
+- Select the WordPress database used by public_html/wp-config.php.
+- Export a backup before importing the new SQL.
+
+2. Upload the theme
+- In cPanel File Manager, open public_html/wp-content/themes.
+- Upload uae-equipment-rental-theme.zip.
+- Extract it there.
+- It should create this folder:
+  public_html/wp-content/themes/dubai-bobcat-rental
+
+3. Install the required plugins on live WordPress
+- Fluent Forms
+- Yoast SEO
+- CookieYes / GDPR Cookie Consent
+- Redirection
+- Safe SVG
+- Regenerate Thumbnails
+- UpdraftPlus
+
+Optional after launch:
+- LiteSpeed Cache, if the hosting server supports LiteSpeed.
+- Wordfence, after the site is stable.
+
+4. Import the database/content
+- In phpMyAdmin, select the live WordPress database.
+- Import deploy/uae-equipment-rental-production.sql.
+- This will replace the fresh WordPress content with the built site content.
+- The imported local admin may become:
+  username: admin
+  password: Admin@123456
+- Change this password immediately after login.
+
+5. Activate and refresh WordPress settings
+- Login at https://uaeequipmentrental.ae/wp-admin.
+- Go to Appearance > Themes and activate UAE Equipment Rental.
+- Go to Settings > Permalinks and click Save Changes.
+- Check Settings > General:
+  WordPress Address: https://uaeequipmentrental.ae
+  Site Address: https://uaeequipmentrental.ae
+
+6. Check the site
+- Home page loads correctly.
+- Main menu links work.
+- Contact form page loads.
+- WhatsApp links open +971 54 738 8695.
+- Blog and guide pages load.
+- Cookie banner can be accepted/closed.
+- Mobile view looks correct.
+
+7. cPanel file notes
+- public_html/index.php must remain.
+- If a real public_html/index.html exists, rename it because it can override WordPress.
+- public_html/index.html_ is not a problem.
+- Old folders like css, fonts, images, and js can stay temporarily; remove later only after confirming they are not used.
+
+8. After launch
+- Enable SSL / Force HTTPS in cPanel or WordPress.
+- Install/activate LiteSpeed Cache if supported.
+- Create an UpdraftPlus backup.
+- Submit sitemap in Google Search Console:
+  https://uaeequipmentrental.ae/sitemap_index.xml

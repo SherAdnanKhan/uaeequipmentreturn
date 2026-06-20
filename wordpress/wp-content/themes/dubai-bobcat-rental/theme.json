@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "color": {
+      "palette": [
+        { "slug": "ink", "color": "#171717", "name": "Ink" },
+        { "slug": "yellow", "color": "#f4bf2a", "name": "Safety Yellow" },
+        { "slug": "teal", "color": "#0d6f72", "name": "Teal" },
+        { "slug": "soft", "color": "#f4f7f6", "name": "Soft Grey" }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "fontFamily": "Arial, Helvetica, sans-serif",
+          "slug": "arial",
+          "name": "Arial"
+        }
+      ]
+    }
+  }
+}

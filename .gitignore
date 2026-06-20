@@ -1,0 +1,41 @@
+# macOS / editor noise
+.DS_Store
+.idea/
+.vscode/
+
+# Local environment and secrets
+.env
+.env.*
+wp-config.php
+wordpress/wp-config.php
+
+# Logs and temporary files
+*.log
+error_log
+debug.log
+tmp/
+
+# Generated deployment artifacts
+deploy/*.zip
+deploy/*.sql
+!deploy/deploy-notes.txt
+
+# Keep the local WordPress install out of git, except the custom theme.
+wordpress/*
+!wordpress/wp-content/
+wordpress/wp-content/*
+!wordpress/wp-content/themes/
+wordpress/wp-content/themes/*
+!wordpress/wp-content/themes/dubai-bobcat-rental/
+!wordpress/wp-content/themes/dubai-bobcat-rental/**
+
+# WordPress generated/media/cache content
+wordpress/wp-content/uploads/
+wordpress/wp-content/upgrade/
+wordpress/wp-content/cache/
+wordpress/wp-content/litespeed/
+wordpress/wp-content/debug.log
+
+# Dependency folders if added later
+node_modules/
+vendor/
