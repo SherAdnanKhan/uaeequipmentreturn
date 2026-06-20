@@ -8,11 +8,11 @@ get_header();
 $hero_image = get_template_directory_uri() . '/assets/bobcat-hero.jpg';
 $asset_uri  = get_template_directory_uri() . '/assets/';
 $reviews    = array(
-	'Excellent bobcat rental service in Dubai. The machine arrived on time, the operator knew the work, and the site cleaning was completed properly. Highly recommended.',
-	'We hired their skid steer loader for sand shifting and levelling work. Professional service, fair pricing and a quick response on WhatsApp.',
-	'Good experience with UAE Equipment Rental. The CAT bobcat was in good condition and helped us finish construction site work faster.',
-	'Reliable bobcat rental service with operator. They handled debris removal and land levelling smoothly, and I would use their service again.',
-	'Very helpful team and fast service. We needed a bobcat urgently for a small construction job in Dubai, and they arranged it quickly.',
+	__( 'Excellent bobcat rental service in Dubai. The machine arrived on time, the operator knew the work, and the site cleaning was completed properly. Highly recommended.', 'dubai-bobcat-rental' ),
+	__( 'We hired their skid steer loader for sand shifting and levelling work. Professional service, fair pricing and a quick response on WhatsApp.', 'dubai-bobcat-rental' ),
+	__( 'Good experience with UAE Equipment Rental. The CAT bobcat was in good condition and helped us finish construction site work faster.', 'dubai-bobcat-rental' ),
+	__( 'Reliable bobcat rental service with operator. They handled debris removal and land levelling smoothly, and I would use their service again.', 'dubai-bobcat-rental' ),
+	__( 'Very helpful team and fast service. We needed a bobcat urgently for a small construction job in Dubai, and they arranged it quickly.', 'dubai-bobcat-rental' ),
 );
 ?>
 
@@ -76,12 +76,12 @@ $reviews    = array(
 			<div><span><?php esc_html_e( 'Operating weight', 'dubai-bobcat-rental' ); ?></span><strong>2641 kg</strong></div>
 		</div>
 		<div class="attachment-row" aria-label="<?php esc_attr_e( 'Attachment examples', 'dubai-bobcat-rental' ); ?>">
-			<span><strong>Bucket</strong><small><?php esc_html_e( 'Loading and cleaning', 'dubai-bobcat-rental' ); ?></small></span>
-			<span><strong>Forks</strong><small><?php esc_html_e( 'Pallet movement', 'dubai-bobcat-rental' ); ?></small></span>
-			<span><strong>Auger</strong><small><?php esc_html_e( 'Post holes', 'dubai-bobcat-rental' ); ?></small></span>
-			<span><strong>Broom</strong><small><?php esc_html_e( 'Surface sweeping', 'dubai-bobcat-rental' ); ?></small></span>
-			<span><strong>Trencher</strong><small><?php esc_html_e( 'Narrow trenching', 'dubai-bobcat-rental' ); ?></small></span>
-			<span><strong>Hammer</strong><small><?php esc_html_e( 'Breaking support', 'dubai-bobcat-rental' ); ?></small></span>
+			<span><strong><?php esc_html_e( 'Bucket', 'dubai-bobcat-rental' ); ?></strong><small><?php esc_html_e( 'Loading and cleaning', 'dubai-bobcat-rental' ); ?></small></span>
+			<span><strong><?php esc_html_e( 'Forks', 'dubai-bobcat-rental' ); ?></strong><small><?php esc_html_e( 'Pallet movement', 'dubai-bobcat-rental' ); ?></small></span>
+			<span><strong><?php esc_html_e( 'Auger', 'dubai-bobcat-rental' ); ?></strong><small><?php esc_html_e( 'Post holes', 'dubai-bobcat-rental' ); ?></small></span>
+			<span><strong><?php esc_html_e( 'Broom', 'dubai-bobcat-rental' ); ?></strong><small><?php esc_html_e( 'Surface sweeping', 'dubai-bobcat-rental' ); ?></small></span>
+			<span><strong><?php esc_html_e( 'Trencher', 'dubai-bobcat-rental' ); ?></strong><small><?php esc_html_e( 'Narrow trenching', 'dubai-bobcat-rental' ); ?></small></span>
+			<span><strong><?php esc_html_e( 'Hammer', 'dubai-bobcat-rental' ); ?></strong><small><?php esc_html_e( 'Breaking support', 'dubai-bobcat-rental' ); ?></small></span>
 		</div>
 	</section>
 
@@ -141,7 +141,7 @@ $reviews    = array(
 			<label><?php esc_html_e( 'Name', 'dubai-bobcat-rental' ); ?> <input name="name" autocomplete="name" required></label>
 			<label><?php esc_html_e( 'Phone', 'dubai-bobcat-rental' ); ?> <input name="phone" autocomplete="tel" required></label>
 			<label><?php esc_html_e( 'WhatsApp', 'dubai-bobcat-rental' ); ?> <input name="whatsapp" autocomplete="tel"></label>
-			<label><?php esc_html_e( 'Job location', 'dubai-bobcat-rental' ); ?> <input name="location" placeholder="Fujairah, Dubai, Sharjah..." required></label>
+			<label><?php esc_html_e( 'Job location', 'dubai-bobcat-rental' ); ?> <input name="location" placeholder="<?php echo esc_attr( dbr_text( 'Fujairah, Dubai, Sharjah...', 'الفجيرة، دبي، الشارقة...' ) ); ?>" required></label>
 			<label><?php esc_html_e( 'Service needed', 'dubai-bobcat-rental' ); ?>
 				<select name="service" required>
 					<option value=""><?php esc_html_e( 'Choose service', 'dubai-bobcat-rental' ); ?></option>
@@ -159,7 +159,7 @@ $reviews    = array(
 					<option><?php esc_html_e( 'Discuss details', 'dubai-bobcat-rental' ); ?></option>
 				</select>
 			</label>
-			<label><?php esc_html_e( 'Attachment required', 'dubai-bobcat-rental' ); ?> <input name="attachment" placeholder="Bucket, forks, auger..."></label>
+			<label><?php esc_html_e( 'Attachment required', 'dubai-bobcat-rental' ); ?> <input name="attachment" placeholder="<?php echo esc_attr( dbr_text( 'Bucket, forks, auger...', 'بكت، فورك، أوجر...' ) ); ?>"></label>
 			<label class="full"><?php esc_html_e( 'Message', 'dubai-bobcat-rental' ); ?> <textarea name="message" rows="4"></textarea></label>
 			<button class="button primary full" type="submit"><?php esc_html_e( 'Send Job Details on WhatsApp', 'dubai-bobcat-rental' ); ?></button>
 			<p class="form-note" role="status" aria-live="polite"></p>
@@ -173,10 +173,10 @@ $reviews    = array(
 			<p><?php esc_html_e( 'Headquarters are in Dibba, Fujairah. Delivery is free near Fujairah, while other emirates are quoted by distance, timing and job duration.', 'dubai-bobcat-rental' ); ?></p>
 		</div>
 		<div class="area-grid">
-			<article><h3>Fujairah & Dibba</h3><p><?php esc_html_e( 'Nearest dispatch area with free local delivery discussion.', 'dubai-bobcat-rental' ); ?></p></article>
-			<article><h3>Dubai & Sharjah</h3><p><?php esc_html_e( 'Common contractor and site-cleaning demand areas.', 'dubai-bobcat-rental' ); ?></p></article>
-			<article><h3>Ajman & RAK</h3><p><?php esc_html_e( 'Available by job location, timing and duration.', 'dubai-bobcat-rental' ); ?></p></article>
-			<article><h3>Abu Dhabi & Al Ain</h3><p><?php esc_html_e( 'Long-distance delivery quoted after job details are shared.', 'dubai-bobcat-rental' ); ?></p></article>
+			<article><h3><?php esc_html_e( 'Fujairah & Dibba', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Nearest dispatch area with free local delivery discussion.', 'dubai-bobcat-rental' ); ?></p></article>
+			<article><h3><?php esc_html_e( 'Dubai & Sharjah', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Common contractor and site-cleaning demand areas.', 'dubai-bobcat-rental' ); ?></p></article>
+			<article><h3><?php esc_html_e( 'Ajman & RAK', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Available by job location, timing and duration.', 'dubai-bobcat-rental' ); ?></p></article>
+			<article><h3><?php esc_html_e( 'Abu Dhabi & Al Ain', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Long-distance delivery quoted after job details are shared.', 'dubai-bobcat-rental' ); ?></p></article>
 		</div>
 	</section>
 
@@ -208,7 +208,7 @@ $reviews    = array(
 			wp_reset_postdata();
 			?>
 		</div>
-		<a class="button light guide-section__link" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"><?php esc_html_e( 'View all guides', 'dubai-bobcat-rental' ); ?></a>
+		<a class="button light guide-section__link" href="<?php echo esc_url( dbr_page_url( 'blog', '/blog/' ) ); ?>"><?php esc_html_e( 'View all guides', 'dubai-bobcat-rental' ); ?></a>
 	</section>
 
 	<section id="faq" class="section faq-section">

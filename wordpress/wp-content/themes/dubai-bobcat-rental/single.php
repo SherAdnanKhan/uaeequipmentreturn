@@ -32,7 +32,7 @@ while ( have_posts() ) :
 				</div>
 				<div class="inner-hero__actions">
 					<a class="button primary" href="<?php echo esc_url( dbr_whatsapp_href() ); ?>"><?php esc_html_e( 'WhatsApp Quote', 'dubai-bobcat-rental' ); ?></a>
-					<a class="button light" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Send Job Details', 'dubai-bobcat-rental' ); ?></a>
+					<a class="button light" href="<?php echo esc_url( dbr_page_url( 'contact', '/contact/' ) ); ?>"><?php esc_html_e( 'Send Job Details', 'dubai-bobcat-rental' ); ?></a>
 				</div>
 			</div>
 			<figure class="guide-hero__media">

@@ -8,10 +8,11 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 
-	$page_id     = get_the_ID();
-	$slug        = get_post_field( 'post_name', $page_id );
-	$parent_id   = (int) wp_get_post_parent_id( $page_id );
-	$parent_slug = $parent_id ? get_post_field( 'post_name', $parent_id ) : '';
+	$page_id      = get_the_ID();
+	$canonical_id = function_exists( 'pll_get_post' ) ? ( pll_get_post( $page_id, 'en' ) ?: $page_id ) : $page_id;
+	$slug         = get_post_field( 'post_name', $canonical_id );
+	$parent_id    = (int) wp_get_post_parent_id( $canonical_id );
+	$parent_slug  = $parent_id ? get_post_field( 'post_name', $parent_id ) : '';
 	$is_service  = 'services' === $parent_slug || in_array( $slug, array( 'services' ), true );
 	$is_machine  = 'machines' === $parent_slug || in_array( $slug, array( 'machines' ), true );
 	$is_area     = 'service-areas' === $parent_slug || in_array( $slug, array( 'service-areas' ), true );
@@ -43,7 +44,7 @@ while ( have_posts() ) :
 				<?php endif; ?>
 				<div class="inner-hero__actions">
 					<a class="button primary" href="<?php echo esc_url( dbr_whatsapp_href() ); ?>"><?php esc_html_e( 'WhatsApp Quote', 'dubai-bobcat-rental' ); ?></a>
-					<a class="button light" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Send Job Details', 'dubai-bobcat-rental' ); ?></a>
+					<a class="button light" href="<?php echo esc_url( dbr_page_url( 'contact', '/contact/' ) ); ?>"><?php esc_html_e( 'Send Job Details', 'dubai-bobcat-rental' ); ?></a>
 				</div>
 			</div>
 			<aside class="inner-hero__panel" aria-label="<?php esc_attr_e( 'Quote checklist', 'dubai-bobcat-rental' ); ?>">
@@ -109,7 +110,7 @@ while ( have_posts() ) :
 				</div>
 				<div class="area-grid page-area-grid">
 					<article><h3><?php esc_html_e( 'Fujairah & Dibba', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Headquarters area and best delivery zone.', 'dubai-bobcat-rental' ); ?></p></article>
-					<article><h3><?php esc_html_e( 'Dubai & Sharjah', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Available for contractor and construction support jobs.', 'dubai-bobcat-rental' ); ?></p><a href="<?php echo esc_url( home_url( '/service-areas/dubai/' ) ); ?>"><?php esc_html_e( 'View Dubai page', 'dubai-bobcat-rental' ); ?></a></article>
+					<article><h3><?php esc_html_e( 'Dubai & Sharjah', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Available for contractor and construction support jobs.', 'dubai-bobcat-rental' ); ?></p><a href="<?php echo esc_url( dbr_page_url( 'dubai', '/service-areas/dubai/' ) ); ?>"><?php esc_html_e( 'View Dubai page', 'dubai-bobcat-rental' ); ?></a></article>
 					<article><h3><?php esc_html_e( 'Ajman, RAK & UAQ', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Delivery quoted by exact location and working duration.', 'dubai-bobcat-rental' ); ?></p></article>
 					<article><h3><?php esc_html_e( 'Abu Dhabi & Al Ain', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Long-distance booking available after details are discussed.', 'dubai-bobcat-rental' ); ?></p></article>
 				</div>

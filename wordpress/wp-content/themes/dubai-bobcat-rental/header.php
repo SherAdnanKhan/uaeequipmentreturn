@@ -14,7 +14,7 @@
 <a class="skip-link" href="#main"><?php esc_html_e( 'Skip to content', 'dubai-bobcat-rental' ); ?></a>
 
 <header class="site-header">
-	<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
+	<a class="brand" href="<?php echo esc_url( dbr_home_url( '/' ) ); ?>" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
 		<span class="brand-mark">UER</span>
 		<span>
 			<strong><?php echo esc_html( dbr_get_business_value( 'business_name', 'UAE Equipment Rental' ) ); ?></strong>
@@ -31,12 +31,14 @@
 		wp_nav_menu(
 			array(
 				'theme_location' => 'primary',
+				'menu'           => dbr_is_ar() ? 'Primary Navigation AR' : 'Primary Navigation EN',
 				'container'      => false,
 				'fallback_cb'    => false,
 				'depth'          => 1,
 			)
 		);
 		?>
+		<?php dbr_language_switcher(); ?>
 		<a class="button primary nav-cta" href="<?php echo esc_url( dbr_phone_href() ); ?>"><?php esc_html_e( 'Call', 'dubai-bobcat-rental' ); ?></a>
 	</nav>
 </header>

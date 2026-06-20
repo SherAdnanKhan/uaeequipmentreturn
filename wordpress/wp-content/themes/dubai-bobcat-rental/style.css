@@ -1,9 +1,9 @@
 /*
 Theme Name: UAE Equipment Rental
-Theme URI: http://localhost:8080
+Theme URI: https://uaeequipmentrental.ae
 Author: Codex
 Description: Mobile-first WordPress theme for UAE bobcat and CAT 226B skid steer loader rental, built from the project SRS.
-Version: 1.0.5
+Version: 1.1.1
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.1
@@ -28,6 +28,8 @@ Text Domain: dubai-bobcat-rental
 
 html {
   scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -36,6 +38,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.55;
   background: var(--paper);
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body.admin-bar .site-header {
@@ -79,12 +83,15 @@ a {
   background: rgba(255, 255, 255, 0.94);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(14px);
+  overflow: hidden;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 0.8rem;
+  min-width: 0;
+  max-width: min(460px, 44vw);
   text-decoration: none;
 }
 
@@ -102,6 +109,9 @@ a {
 .brand strong,
 .brand small {
   display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .brand small {
@@ -133,6 +143,34 @@ a {
   padding: 0.62rem 0.95rem;
   background: var(--ink);
   color: white;
+}
+
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.language-switcher a {
+  display: inline-grid;
+  min-width: 34px;
+  min-height: 28px;
+  place-items: center;
+  padding: 0 0.5rem;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.language-switcher a[aria-current="true"] {
+  background: var(--ink);
+  color: #fff;
 }
 
 .nav-toggle {
@@ -489,6 +527,48 @@ details p {
   display: none;
 }
 
+html[dir="rtl"] body {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] .hero-overlay {
+  background:
+    linear-gradient(270deg, rgba(17, 24, 39, 0.88), rgba(17, 24, 39, 0.58) 44%, rgba(17, 24, 39, 0.08)),
+    linear-gradient(0deg, rgba(17, 24, 39, 0.35), rgba(17, 24, 39, 0));
+}
+
+html[dir="rtl"] .hero-content {
+  margin-left: auto;
+  text-align: right;
+}
+
+html[dir="rtl"] .check-list {
+  padding-right: 1.2rem;
+  padding-left: 0;
+}
+
+html[dir="rtl"] .quote-form input,
+html[dir="rtl"] .quote-form select,
+html[dir="rtl"] .quote-form textarea,
+html[dir="rtl"] .fluentform input.ff-el-form-control,
+html[dir="rtl"] .fluentform select.ff-el-form-control,
+html[dir="rtl"] .fluentform textarea.ff-el-form-control {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] input[type="tel"],
+html[dir="rtl"] input[name*="phone"],
+html[dir="rtl"] input[name*="whatsapp"] {
+  direction: ltr;
+  text-align: right;
+}
+
+html[dir="rtl"] .breadcrumbs span {
+  transform: scaleX(-1);
+}
+
 .cky-consent-container,
 .cky-modal,
 .cky-preference-center {
@@ -518,6 +598,11 @@ details p {
 
   .nav-toggle {
     display: block;
+    flex: 0 0 44px;
+  }
+
+  .brand {
+    max-width: calc(100% - 62px);
   }
 
   .site-nav {
@@ -605,6 +690,40 @@ details p {
 }
 
 @media (max-width: 520px) {
+  html[dir="rtl"] .site-header {
+    direction: ltr;
+  }
+
+  html[dir="rtl"] .brand {
+    direction: ltr;
+    text-align: left;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
+  html[dir="rtl"] .hero-content {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  html[dir="rtl"] .hero h1 {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(2.1rem, 10.5vw, 2.8rem);
+    line-height: 1.08;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  html[dir="rtl"] .hero-lede {
+    font-size: 0.95rem;
+  }
+
   .brand strong {
     font-size: 0.9rem;
   }
@@ -1947,5 +2066,62 @@ details p {
 
   .guide-sidebar-stack {
     position: static;
+  }
+}
+
+/* Final RTL/mobile safeguards. Keep these at the end so they win over
+   earlier visual-system overrides. */
+html[dir="rtl"] .cky-consent-container,
+html[dir="rtl"] .cky-modal,
+html[dir="rtl"] .cky-preference-center {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+html[dir="rtl"] .cky-consent-container *,
+html[dir="rtl"] .cky-modal *,
+html[dir="rtl"] .cky-preference-center * {
+  direction: ltr !important;
+}
+
+html[dir="rtl"] .cky-btn,
+html[dir="rtl"] .cky-notice-btn-wrapper {
+  text-align: center !important;
+}
+
+@media (max-width: 520px) {
+  html[dir="rtl"] .hero-content {
+    display: grid;
+    justify-items: end;
+    width: 100%;
+    padding-right: 1.75rem;
+    padding-left: 1.25rem;
+  }
+
+  html[dir="rtl"] .hero .eyebrow,
+  html[dir="rtl"] .hero h1,
+  html[dir="rtl"] .hero-lede,
+  html[dir="rtl"] .hero-actions {
+    width: min(100%, 330px);
+    max-width: 330px;
+    margin-right: 0;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  html[dir="rtl"] .hero h1 {
+    padding-right: 0.2rem;
+    font-size: clamp(2rem, 9vw, 2.45rem);
+    line-height: 1.14;
+    overflow: visible;
+  }
+
+  html[dir="rtl"] .hero-lede {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  html[dir="rtl"] .hero-actions {
+    justify-content: flex-end;
   }
 }

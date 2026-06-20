@@ -49,13 +49,13 @@ http://localhost:8081
 
 ## Useful Setup Scripts
 
-Rebuild SRS pages, blog posts, menus, and SEO metadata:
+Rebuild bilingual English/Arabic pages, blog posts, menus, Polylang links, and SEO metadata:
 
 ```bash
 /Applications/ServBay/package/php/8.1/8.1.34/bin/php -d memory_limit=512M /opt/homebrew/bin/wp eval-file setup-wordpress-content.php --path=wordpress
 ```
 
-Recreate and embed the Fluent Forms quote form:
+Recreate and embed the English and Arabic Fluent Forms quote forms:
 
 ```bash
 /Applications/ServBay/package/php/8.1/8.1.34/bin/php -d memory_limit=512M /opt/homebrew/bin/wp eval-file setup-fluent-form.php --path=wordpress
@@ -66,6 +66,7 @@ Recreate and embed the Fluent Forms quote form:
 - Database name: `testapp_wp`
 - WordPress folder: `wordpress/`
 - Active theme: `dubai-bobcat-rental`
+- Languages: English default plus Arabic at `/ar/` through Polylang.
 - Business name: `UAE Equipment Rental`
 - Phone / WhatsApp: `+971 54 738 8695`
 - Headquarters: `Dibba, Fujairah, United Arab Emirates`

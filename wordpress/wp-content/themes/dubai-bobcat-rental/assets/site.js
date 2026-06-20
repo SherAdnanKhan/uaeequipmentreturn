@@ -24,30 +24,31 @@ form?.addEventListener("submit", (event) => {
   if (!form.checkValidity()) {
     form.reportValidity();
     if (note) {
-      note.textContent = "Please add name, phone, job location and service before sending.";
+      note.textContent = window.dbrBusiness?.messages?.invalid || "Please add name, phone, job location and service before sending.";
       note.classList.add("is-error");
     }
     return;
   }
 
   const data = new FormData(form);
+  const labels = window.dbrBusiness?.messages || {};
   const message = [
-    "Hello, I need a CAT 226B bobcat rental quote in the UAE.",
-    `Name: ${data.get("name") || ""}`,
-    `Phone: ${data.get("phone") || ""}`,
-    `WhatsApp: ${data.get("whatsapp") || ""}`,
-    `Location: ${data.get("location") || ""}`,
-    `Service: ${data.get("service") || ""}`,
-    `Date: ${data.get("date") || ""}`,
-    `Operator: ${data.get("operator") || ""}`,
-    `Attachment: ${data.get("attachment") || ""}`,
-    `Message: ${data.get("message") || ""}`
+    labels.intro || "Hello, I need a CAT 226B bobcat rental quote in the UAE.",
+    `${labels.name || "Name"}: ${data.get("name") || ""}`,
+    `${labels.phone || "Phone"}: ${data.get("phone") || ""}`,
+    `${labels.wa || "WhatsApp"}: ${data.get("whatsapp") || ""}`,
+    `${labels.loc || "Location"}: ${data.get("location") || ""}`,
+    `${labels.service || "Service"}: ${data.get("service") || ""}`,
+    `${labels.date || "Date"}: ${data.get("date") || ""}`,
+    `${labels.operator || "Operator"}: ${data.get("operator") || ""}`,
+    `${labels.attach || "Attachment"}: ${data.get("attachment") || ""}`,
+    `${labels.message || "Message"}: ${data.get("message") || ""}`
   ].join("\n");
 
   const whatsapp = (window.dbrBusiness?.whatsapp || "+971547388695").replace(/[^0-9]/g, "");
   const whatsappUrl = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
   if (note) {
-    note.textContent = "Opening WhatsApp with your quote details.";
+    note.textContent = labels.opening || "Opening WhatsApp with your quote details.";
   }
 
   const opened = window.open(whatsappUrl, "_blank", "noopener,noreferrer");

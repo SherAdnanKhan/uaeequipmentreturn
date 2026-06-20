@@ -28,6 +28,7 @@ Important:
   public_html/wp-content/themes/dubai-bobcat-rental
 
 3. Install the required plugins on live WordPress
+- Polylang
 - Fluent Forms
 - Yoast SEO
 - CookieYes / GDPR Cookie Consent
@@ -59,10 +60,15 @@ Optional after launch:
 
 6. Check the site
 - Home page loads correctly.
+- Arabic home page opens from /ar/ and redirects to the Arabic home URL.
+- Language switcher changes between EN and AR.
 - Main menu links work.
-- Contact form page loads.
+- Contact form page loads at /contact/.
+- Old /contact-and-quote-request/ URL redirects to /contact/.
+- Arabic contact page shows the Arabic quote form.
 - WhatsApp links open +971 54 738 8695.
 - Blog and guide pages load.
+- English and Arabic blog/guide pages load.
 - Cookie banner can be accepted/closed.
 - Mobile view looks correct.
 
@@ -78,3 +84,4 @@ Optional after launch:
 - Create an UpdraftPlus backup.
 - Submit sitemap in Google Search Console:
   https://uaeequipmentrental.ae/sitemap_index.xml
+- In Google Search Console, inspect both English and Arabic URLs after launch.

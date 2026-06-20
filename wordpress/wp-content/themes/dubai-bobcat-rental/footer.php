@@ -12,13 +12,13 @@
 	<div class="footer-columns">
 		<div>
 			<strong><?php esc_html_e( 'Rental Pages', 'dubai-bobcat-rental' ); ?></strong>
-			<a href="<?php echo esc_url( home_url( '/services/bobcat-rental-dubai/' ) ); ?>"><?php esc_html_e( 'Bobcat Rental Dubai', 'dubai-bobcat-rental' ); ?></a>
-			<a href="<?php echo esc_url( home_url( '/machines/cat-226b-skid-steer-loader/' ) ); ?>"><?php esc_html_e( 'CAT 226B Specs', 'dubai-bobcat-rental' ); ?></a>
-			<a href="<?php echo esc_url( home_url( '/service-areas/' ) ); ?>"><?php esc_html_e( 'UAE Service Areas', 'dubai-bobcat-rental' ); ?></a>
+			<a href="<?php echo esc_url( dbr_page_url( 'bobcat-rental-dubai', '/services/bobcat-rental-dubai/' ) ); ?>"><?php esc_html_e( 'Bobcat Rental Dubai', 'dubai-bobcat-rental' ); ?></a>
+			<a href="<?php echo esc_url( dbr_page_url( 'cat-226b-skid-steer-loader', '/machines/cat-226b-skid-steer-loader/' ) ); ?>"><?php esc_html_e( 'CAT 226B Specs', 'dubai-bobcat-rental' ); ?></a>
+			<a href="<?php echo esc_url( dbr_page_url( 'service-areas', '/service-areas/' ) ); ?>"><?php esc_html_e( 'UAE Service Areas', 'dubai-bobcat-rental' ); ?></a>
 		</div>
 		<div>
 			<strong><?php esc_html_e( 'Contact', 'dubai-bobcat-rental' ); ?></strong>
-			<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Quote Form', 'dubai-bobcat-rental' ); ?></a>
+			<a href="<?php echo esc_url( dbr_page_url( 'contact', '/contact/' ) ); ?>"><?php esc_html_e( 'Quote Form', 'dubai-bobcat-rental' ); ?></a>
 			<a href="<?php echo esc_url( dbr_phone_href() ); ?>"><?php esc_html_e( 'Call', 'dubai-bobcat-rental' ); ?></a>
 			<a href="<?php echo esc_url( dbr_whatsapp_href() ); ?>"><?php esc_html_e( 'WhatsApp', 'dubai-bobcat-rental' ); ?></a>
 		</div>
