@@ -26,8 +26,8 @@ function dbr_setup() {
 add_action( 'after_setup_theme', 'dbr_setup' );
 
 function dbr_enqueue_assets() {
-	wp_enqueue_style( 'dbr-style', get_stylesheet_uri(), array(), '1.1.1' );
-	wp_enqueue_script( 'dbr-script', get_template_directory_uri() . '/assets/site.js', array(), '1.1.1', true );
+	wp_enqueue_style( 'dbr-style', get_stylesheet_uri(), array(), '1.1.3' );
+	wp_enqueue_script( 'dbr-script', get_template_directory_uri() . '/assets/site.js', array(), '1.1.3', true );
 	wp_localize_script(
 		'dbr-script',
 		'dbrBusiness',
@@ -105,6 +105,30 @@ function dbr_page_url( $slug, $fallback = '' ) {
 	}
 
 	return home_url( $fallback ? $fallback : '/' . trim( $slug, '/' ) . '/' );
+}
+
+function dbr_primary_nav_items() {
+	if ( dbr_is_ar() ) {
+		return array(
+			array( 'label' => 'الرئيسية', 'url' => dbr_home_url( '/' ) ),
+			array( 'label' => 'تأجير بوبكات', 'url' => dbr_page_url( 'bobcat-rental-dubai', '/services/bobcat-rental-dubai/' ) ),
+			array( 'label' => 'CAT 226B', 'url' => dbr_page_url( 'cat-226b-skid-steer-loader', '/machines/cat-226b-skid-steer-loader/' ) ),
+			array( 'label' => 'الخدمات', 'url' => dbr_page_url( 'services', '/services/' ) ),
+			array( 'label' => 'مناطق الخدمة', 'url' => dbr_page_url( 'service-areas', '/service-areas/' ) ),
+			array( 'label' => 'المدونة', 'url' => dbr_page_url( 'blog', '/blog/' ) ),
+			array( 'label' => 'اتصل بنا', 'url' => dbr_page_url( 'contact', '/contact/' ) ),
+		);
+	}
+
+	return array(
+		array( 'label' => 'Home', 'url' => dbr_home_url( '/' ) ),
+		array( 'label' => 'Bobcat Rental UAE', 'url' => dbr_page_url( 'bobcat-rental-dubai', '/services/bobcat-rental-dubai/' ) ),
+		array( 'label' => 'CAT 226B', 'url' => dbr_page_url( 'cat-226b-skid-steer-loader', '/machines/cat-226b-skid-steer-loader/' ) ),
+		array( 'label' => 'Services', 'url' => dbr_page_url( 'services', '/services/' ) ),
+		array( 'label' => 'Service Areas', 'url' => dbr_page_url( 'service-areas', '/service-areas/' ) ),
+		array( 'label' => 'Blog', 'url' => dbr_page_url( 'blog', '/blog/' ) ),
+		array( 'label' => 'Contact', 'url' => dbr_page_url( 'contact', '/contact/' ) ),
+	);
 }
 
 function dbr_redirect_legacy_paths() {

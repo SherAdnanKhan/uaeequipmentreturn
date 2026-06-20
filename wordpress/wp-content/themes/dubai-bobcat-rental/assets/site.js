@@ -2,14 +2,26 @@ const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector("#site-nav");
 
 navToggle?.addEventListener("click", () => {
+  if (!siteNav) {
+    return;
+  }
+
   const isOpen = siteNav.classList.toggle("is-open");
   navToggle.setAttribute("aria-expanded", String(isOpen));
 });
 
 siteNav?.addEventListener("click", (event) => {
-  if (event.target.matches("a")) {
+  if (event.target instanceof Element && event.target.closest("a")) {
     siteNav.classList.remove("is-open");
     navToggle?.setAttribute("aria-expanded", "false");
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && siteNav?.classList.contains("is-open")) {
+    siteNav.classList.remove("is-open");
+    navToggle?.setAttribute("aria-expanded", "false");
+    navToggle?.focus();
   }
 });
 

@@ -27,17 +27,13 @@
 		<span></span>
 	</button>
 	<nav id="site-nav" class="site-nav" aria-label="<?php esc_attr_e( 'Primary navigation', 'dubai-bobcat-rental' ); ?>">
-		<?php
-		wp_nav_menu(
-			array(
-				'theme_location' => 'primary',
-				'menu'           => dbr_is_ar() ? 'Primary Navigation AR' : 'Primary Navigation EN',
-				'container'      => false,
-				'fallback_cb'    => false,
-				'depth'          => 1,
-			)
-		);
-		?>
+		<ul id="menu-primary-navigation" class="menu dbr-primary-menu">
+			<?php foreach ( dbr_primary_nav_items() as $nav_item ) : ?>
+				<li class="menu-item">
+					<a href="<?php echo esc_url( $nav_item['url'] ); ?>"><?php echo esc_html( $nav_item['label'] ); ?></a>
+				</li>
+			<?php endforeach; ?>
+		</ul>
 		<?php dbr_language_switcher(); ?>
 		<a class="button primary nav-cta" href="<?php echo esc_url( dbr_phone_href() ); ?>"><?php esc_html_e( 'Call', 'dubai-bobcat-rental' ); ?></a>
 	</nav>
