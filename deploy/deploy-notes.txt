@@ -3,6 +3,8 @@ UAE Equipment Rental WordPress Deployment Notes
 Local deploy files:
 - deploy/uae-equipment-rental-theme.zip
 - deploy/uae-equipment-rental-production.sql
+- deploy/uae-equipment-rental-seo-growth.sql
+- deploy/uae-equipment-rental-local-test.sql
 - deploy/uae-equipment-rental-deploy-package.zip
 
 Target domain:
@@ -43,7 +45,9 @@ Optional after launch:
 
 4. Import the database/content
 - In phpMyAdmin, select the live WordPress database.
-- Import deploy/uae-equipment-rental-production.sql.
+- Import deploy/uae-equipment-rental-seo-growth.sql for the latest build with local SEO pages and 30 guide articles.
+- deploy/uae-equipment-rental-production.sql is also updated to the same latest content, but use the SEO growth file so the purpose is clear.
+- deploy/uae-equipment-rental-local-test.sql is only for local testing because it keeps localhost URLs.
 - This will replace the fresh WordPress content with the built site content.
 - The imported local admin may become:
   username: admin
@@ -60,15 +64,26 @@ Optional after launch:
 
 6. Check the site
 - Home page loads correctly.
+- These SEO landing pages load:
+  /bobcat-rental-dubai/
+  /bobcat-rental-sharjah/
+  /bobcat-rental-abu-dhabi/
+  /bobcat-rental-ajman/
+  /bobcat-rental-fujairah/
+  /bobcat-rental-rak/
+  /skid-steer-loader-rental-uae/
+  /cat-226b-rental-uae/
 - Arabic home page opens from /ar/ and redirects to the Arabic home URL.
 - Language switcher changes between EN and AR.
 - Main menu links work.
 - Contact form page loads at /contact/.
 - Old /contact-and-quote-request/ URL redirects to /contact/.
+- Old /services/bobcat-rental-dubai/ redirects to /bobcat-rental-dubai/.
+- Old /machines/cat-226b-skid-steer-loader/ redirects to /cat-226b-rental-uae/.
 - Arabic contact page shows the Arabic quote form.
 - WhatsApp links open +971 54 738 8695.
 - Blog and guide pages load.
-- English and Arabic blog/guide pages load.
+- English and Arabic blog/guide pages load. The latest SEO build adds 30 English guide articles and 30 Arabic versions.
 - Cookie banner can be accepted/closed.
 - Mobile view looks correct.
 
@@ -84,4 +99,8 @@ Optional after launch:
 - Create an UpdraftPlus backup.
 - Submit sitemap in Google Search Console:
   https://uaeequipmentrental.ae/sitemap_index.xml
+  https://uaeequipmentrental.ae/sitemap.xml
 - In Google Search Console, inspect both English and Arabic URLs after launch.
+- Create or optimize Google Business Profile with the same name, phone, website, headquarters, 24/7 hours and service areas.
+- Add real customer photos and ask real customers for reviews mentioning the actual service/location.
+- Add matching NAP citations on Bing Places, Facebook, Instagram, LinkedIn and UAE construction/equipment directories.

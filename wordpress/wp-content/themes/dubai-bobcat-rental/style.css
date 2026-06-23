@@ -3,7 +3,7 @@ Theme Name: UAE Equipment Rental
 Theme URI: https://uaeequipmentrental.ae
 Author: Codex
 Description: Mobile-first WordPress theme for UAE bobcat and CAT 226B skid steer loader rental, built from the project SRS.
-Version: 1.1.6
+Version: 1.2.0
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.1
@@ -1410,11 +1410,12 @@ details p {
 
 .page-area-grid a,
 .text-link {
-  display: inline-flex;
-  margin-top: 0.85rem;
-  color: var(--teal);
-  font-weight: 700;
-  text-decoration: none;
+	display: inline-flex;
+	margin-top: 0.85rem;
+	margin-inline-end: 0.9rem;
+	color: var(--teal);
+	font-weight: 700;
+	text-decoration: none;
 }
 
 .guide-section {

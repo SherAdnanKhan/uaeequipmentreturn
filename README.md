@@ -55,11 +55,34 @@ Rebuild bilingual English/Arabic pages, blog posts, menus, Polylang links, and S
 /Applications/ServBay/package/php/8.1/8.1.34/bin/php -d memory_limit=512M /opt/homebrew/bin/wp eval-file setup-wordpress-content.php --path=wordpress
 ```
 
+Add/update the local SEO growth pages and article cluster:
+
+```bash
+/Applications/ServBay/package/php/8.1/8.1.34/bin/php -d memory_limit=512M /opt/homebrew/bin/wp eval-file setup-seo-growth-content.php --path=wordpress
+```
+
 Recreate and embed the English and Arabic Fluent Forms quote forms:
 
 ```bash
 /Applications/ServBay/package/php/8.1/8.1.34/bin/php -d memory_limit=512M /opt/homebrew/bin/wp eval-file setup-fluent-form.php --path=wordpress
 ```
+
+## Deploy Files
+
+- `deploy/uae-equipment-rental-theme.zip`: upload/extract into `public_html/wp-content/themes`.
+- `deploy/uae-equipment-rental-seo-growth.sql`: latest full database export for live deployment, with `https://uaeequipmentrental.ae` URLs, SEO landing pages, and 30 guide articles in English plus Arabic versions.
+- `deploy/uae-equipment-rental-production.sql`: same latest live-domain full database export, kept for the original deployment flow.
+- `deploy/uae-equipment-rental-local-test.sql`: same content for local testing, with `http://localhost:8080` URLs.
+- `deploy/uae-equipment-rental-deploy-package.zip`: convenience bundle only; do not upload it as a WordPress theme.
+
+## SEO Build Includes
+
+- Location pages for Dubai, Sharjah, Abu Dhabi, Ajman, Fujairah/Dibba, and Ras Al Khaimah.
+- Service pages for skid steer loader rental UAE and CAT 226B rental UAE.
+- 30 English SEO guide posts and 30 Arabic counterparts.
+- Yoast SEO titles/descriptions/focus keywords.
+- Internal links from the home page and service area page into the landing pages.
+- LocalBusiness, Service, WebPage/Article, Breadcrumb and FAQ schema output from the theme.
 
 ## Notes
 

@@ -13,7 +13,17 @@ while ( have_posts() ) :
 	$slug         = get_post_field( 'post_name', $canonical_id );
 	$parent_id    = (int) wp_get_post_parent_id( $canonical_id );
 	$parent_slug  = $parent_id ? get_post_field( 'post_name', $parent_id ) : '';
-	$is_service  = 'services' === $parent_slug || in_array( $slug, array( 'services' ), true );
+	$seo_service_slugs = array(
+		'bobcat-rental-dubai',
+		'bobcat-rental-sharjah',
+		'bobcat-rental-abu-dhabi',
+		'bobcat-rental-ajman',
+		'bobcat-rental-fujairah',
+		'bobcat-rental-rak',
+		'skid-steer-loader-rental-uae',
+		'cat-226b-rental-uae',
+	);
+	$is_service  = 'services' === $parent_slug || in_array( $slug, array_merge( array( 'services' ), $seo_service_slugs ), true );
 	$is_machine  = 'machines' === $parent_slug || in_array( $slug, array( 'machines' ), true );
 	$is_area     = 'service-areas' === $parent_slug || in_array( $slug, array( 'service-areas' ), true );
 	$is_contact  = 'contact' === $slug;
@@ -109,10 +119,10 @@ while ( have_posts() ) :
 					</aside>
 				</div>
 				<div class="area-grid page-area-grid">
-					<article><h3><?php esc_html_e( 'Fujairah & Dibba', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Headquarters area and best delivery zone.', 'dubai-bobcat-rental' ); ?></p></article>
-					<article><h3><?php esc_html_e( 'Dubai & Sharjah', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Available for contractor and construction support jobs.', 'dubai-bobcat-rental' ); ?></p><a href="<?php echo esc_url( dbr_page_url( 'dubai', '/service-areas/dubai/' ) ); ?>"><?php esc_html_e( 'View Dubai page', 'dubai-bobcat-rental' ); ?></a></article>
-					<article><h3><?php esc_html_e( 'Ajman, RAK & UAQ', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Delivery quoted by exact location and working duration.', 'dubai-bobcat-rental' ); ?></p></article>
-					<article><h3><?php esc_html_e( 'Abu Dhabi & Al Ain', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Long-distance booking available after details are discussed.', 'dubai-bobcat-rental' ); ?></p></article>
+					<article><h3><?php esc_html_e( 'Fujairah & Dibba', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Headquarters area and best delivery zone.', 'dubai-bobcat-rental' ); ?></p><a href="<?php echo esc_url( dbr_page_url( 'bobcat-rental-fujairah', '/bobcat-rental-fujairah/' ) ); ?>"><?php echo esc_html( dbr_text( 'View Fujairah page', 'عرض صفحة الفجيرة' ) ); ?></a></article>
+					<article><h3><?php esc_html_e( 'Dubai & Sharjah', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Available for contractor and construction support jobs.', 'dubai-bobcat-rental' ); ?></p><a href="<?php echo esc_url( dbr_page_url( 'bobcat-rental-dubai', '/bobcat-rental-dubai/' ) ); ?>"><?php esc_html_e( 'View Dubai page', 'dubai-bobcat-rental' ); ?></a><a href="<?php echo esc_url( dbr_page_url( 'bobcat-rental-sharjah', '/bobcat-rental-sharjah/' ) ); ?>"><?php echo esc_html( dbr_text( 'View Sharjah page', 'عرض صفحة الشارقة' ) ); ?></a></article>
+					<article><h3><?php esc_html_e( 'Ajman, RAK & UAQ', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Delivery quoted by exact location and working duration.', 'dubai-bobcat-rental' ); ?></p><a href="<?php echo esc_url( dbr_page_url( 'bobcat-rental-ajman', '/bobcat-rental-ajman/' ) ); ?>"><?php echo esc_html( dbr_text( 'View Ajman page', 'عرض صفحة عجمان' ) ); ?></a><a href="<?php echo esc_url( dbr_page_url( 'bobcat-rental-rak', '/bobcat-rental-rak/' ) ); ?>"><?php echo esc_html( dbr_text( 'View RAK page', 'عرض صفحة رأس الخيمة' ) ); ?></a></article>
+					<article><h3><?php esc_html_e( 'Abu Dhabi & Al Ain', 'dubai-bobcat-rental' ); ?></h3><p><?php esc_html_e( 'Long-distance booking available after details are discussed.', 'dubai-bobcat-rental' ); ?></p><a href="<?php echo esc_url( dbr_page_url( 'bobcat-rental-abu-dhabi', '/bobcat-rental-abu-dhabi/' ) ); ?>"><?php echo esc_html( dbr_text( 'View Abu Dhabi page', 'عرض صفحة أبوظبي' ) ); ?></a></article>
 				</div>
 			</section>
 		<?php elseif ( $is_contact ) : ?>

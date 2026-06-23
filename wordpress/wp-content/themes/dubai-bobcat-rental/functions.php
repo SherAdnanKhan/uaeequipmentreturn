@@ -26,8 +26,8 @@ function dbr_setup() {
 add_action( 'after_setup_theme', 'dbr_setup' );
 
 function dbr_enqueue_assets() {
-	wp_enqueue_style( 'dbr-style', get_stylesheet_uri(), array(), '1.1.6' );
-	wp_enqueue_script( 'dbr-script', get_template_directory_uri() . '/assets/site.js', array(), '1.1.6', true );
+	wp_enqueue_style( 'dbr-style', get_stylesheet_uri(), array(), '1.2.0' );
+	wp_enqueue_script( 'dbr-script', get_template_directory_uri() . '/assets/site.js', array(), '1.2.0', true );
 	wp_localize_script(
 		'dbr-script',
 		'dbrBusiness',
@@ -113,8 +113,8 @@ function dbr_primary_nav_items() {
 	if ( dbr_is_ar() ) {
 		return array(
 			array( 'label' => 'الرئيسية', 'url' => dbr_home_url( '/' ) ),
-			array( 'label' => 'تأجير بوبكات', 'url' => dbr_page_url( 'bobcat-rental-dubai', '/services/bobcat-rental-dubai/' ) ),
-			array( 'label' => 'CAT 226B', 'url' => dbr_page_url( 'cat-226b-skid-steer-loader', '/machines/cat-226b-skid-steer-loader/' ) ),
+			array( 'label' => 'تأجير بوبكات', 'url' => dbr_page_url( 'bobcat-rental-dubai', '/bobcat-rental-dubai/' ) ),
+			array( 'label' => 'CAT 226B', 'url' => dbr_page_url( 'cat-226b-rental-uae', '/cat-226b-rental-uae/' ) ),
 			array( 'label' => 'الخدمات', 'url' => dbr_page_url( 'services', '/services/' ) ),
 			array( 'label' => 'مناطق الخدمة', 'url' => dbr_page_url( 'service-areas', '/service-areas/' ) ),
 			array( 'label' => 'المدونة', 'url' => dbr_page_url( 'blog', '/blog/' ) ),
@@ -124,8 +124,8 @@ function dbr_primary_nav_items() {
 
 	return array(
 		array( 'label' => 'Home', 'url' => dbr_home_url( '/' ) ),
-		array( 'label' => 'Bobcat Rental UAE', 'url' => dbr_page_url( 'bobcat-rental-dubai', '/services/bobcat-rental-dubai/' ) ),
-		array( 'label' => 'CAT 226B', 'url' => dbr_page_url( 'cat-226b-skid-steer-loader', '/machines/cat-226b-skid-steer-loader/' ) ),
+		array( 'label' => 'Bobcat Rental UAE', 'url' => dbr_page_url( 'bobcat-rental-dubai', '/bobcat-rental-dubai/' ) ),
+		array( 'label' => 'CAT 226B', 'url' => dbr_page_url( 'cat-226b-rental-uae', '/cat-226b-rental-uae/' ) ),
 		array( 'label' => 'Services', 'url' => dbr_page_url( 'services', '/services/' ) ),
 		array( 'label' => 'Service Areas', 'url' => dbr_page_url( 'service-areas', '/service-areas/' ) ),
 		array( 'label' => 'Blog', 'url' => dbr_page_url( 'blog', '/blog/' ) ),
@@ -137,8 +137,15 @@ function dbr_redirect_legacy_paths() {
 	$request_path = isset( $_SERVER['REQUEST_URI'] ) ? wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ) : '';
 	$request_path = trim( (string) $request_path, '/' );
 
-	if ( 'contact-and-quote-request' === $request_path ) {
-		wp_safe_redirect( dbr_page_url( 'contact', '/contact/' ), 301 );
+	$legacy_paths = array(
+		'contact-and-quote-request'          => array( 'contact', '/contact/' ),
+		'services/bobcat-rental-dubai'       => array( 'bobcat-rental-dubai', '/bobcat-rental-dubai/' ),
+		'service-areas/dubai'                => array( 'bobcat-rental-dubai', '/bobcat-rental-dubai/' ),
+		'machines/cat-226b-skid-steer-loader'=> array( 'cat-226b-rental-uae', '/cat-226b-rental-uae/' ),
+	);
+
+	if ( isset( $legacy_paths[ $request_path ] ) ) {
+		wp_safe_redirect( dbr_page_url( $legacy_paths[ $request_path ][0], $legacy_paths[ $request_path ][1] ), 301 );
 		exit;
 	}
 }
@@ -441,69 +448,150 @@ function dbr_customize_register( $wp_customize ) {
 }
 add_action( 'customize_register', 'dbr_customize_register' );
 
+function dbr_schema_faq_entities() {
+	return array(
+		array(
+			'@type'          => 'Question',
+			'name'           => dbr_text( 'Is this a Bobcat or a skid steer loader?', 'هل هذه بوبكات أم سكيد ستير لودر؟' ),
+			'acceptedAnswer' => array(
+				'@type' => 'Answer',
+				'text'  => dbr_text( 'Many customers search for bobcat rental, but the available machine is a CAT 226B skid steer loader.', 'كثير من العملاء يبحثون عن تأجير بوبكات، لكن الآلة المتوفرة هي سكيد ستير لودر CAT 226B.' ),
+			),
+		),
+		array(
+			'@type'          => 'Question',
+			'name'           => dbr_text( 'Can I rent the machine with an operator?', 'هل يمكن استئجار الآلة مع مشغل؟' ),
+			'acceptedAnswer' => array(
+				'@type' => 'Answer',
+				'text'  => dbr_text( 'Yes. The bobcat is supplied with an operator for rental jobs. Availability depends on date, job location and work type.', 'نعم. يتم توفير البوبكات مع مشغل لأعمال التأجير. التوفر يعتمد على التاريخ وموقع العمل ونوع الخدمة.' ),
+			),
+		),
+		array(
+			'@type'          => 'Question',
+			'name'           => dbr_text( 'What information is needed for a quote?', 'ما المعلومات المطلوبة للحصول على سعر؟' ),
+			'acceptedAnswer' => array(
+				'@type' => 'Answer',
+				'text'  => dbr_text( 'Send the job location, work type, preferred date, expected duration, site access notes and attachment requirement if known.', 'أرسل موقع العمل ونوع العمل والتاريخ المفضل والمدة المتوقعة وملاحظات الدخول والملحق المطلوب إن وجد.' ),
+			),
+		),
+		array(
+			'@type'          => 'Question',
+			'name'           => dbr_text( 'Is delivery free?', 'هل التوصيل مجاني؟' ),
+			'acceptedAnswer' => array(
+				'@type' => 'Answer',
+				'text'  => dbr_text( 'Delivery can be free near Fujairah. Dubai, Sharjah, Abu Dhabi and other UAE locations are quoted after the exact location and duration are known.', 'يمكن أن يكون التوصيل مجانيا قرب الفجيرة. يتم تسعير دبي والشارقة وأبوظبي وباقي مناطق الإمارات بعد معرفة الموقع والمدة.' ),
+			),
+		),
+	);
+}
+
 function dbr_schema() {
-	if ( ! is_front_page() ) {
+	if ( is_admin() ) {
 		return;
 	}
 
-	$site_url  = dbr_home_url( '/' );
+	$site_url    = dbr_home_url( '/' );
+	$current_url = is_singular() ? get_permalink() : $site_url;
+	if ( is_home() ) {
+		$current_url = dbr_page_url( 'blog', '/blog/' );
+	}
+
 	$image_url = get_template_directory_uri() . '/assets/bobcat-hero.jpg';
-	$areas     = array_map( 'trim', explode( ',', dbr_get_business_value( 'service_areas', 'Dubai' ) ) );
+	$areas     = array_filter( array_map( 'trim', explode( ',', dbr_get_business_value( 'service_areas', 'Dubai' ) ) ) );
+	$lang      = dbr_is_ar() ? 'ar-AE' : 'en-AE';
+	$title     = wp_get_document_title();
+
+	$graph = array(
+		array(
+			'@type'       => 'WebSite',
+			'@id'         => $site_url . '#website',
+			'url'         => $site_url,
+			'name'        => dbr_get_business_value( 'business_name', 'UAE Equipment Rental' ),
+			'inLanguage'  => $lang,
+			'publisher'   => array( '@id' => $site_url . '#business' ),
+		),
+		array(
+			'@type'       => 'LocalBusiness',
+			'@id'         => $site_url . '#business',
+			'name'        => dbr_get_business_value( 'business_name', 'UAE Equipment Rental' ),
+			'legalName'   => dbr_get_business_value( 'legal_name', 'UAE Equipment Rental' ),
+			'url'         => $site_url,
+			'telephone'   => dbr_get_business_value( 'phone', '+971 54 738 8695' ),
+			'address'     => array(
+				'@type'           => 'PostalAddress',
+				'streetAddress'   => dbr_get_business_value( 'address', 'Headquarters: Dibba, Fujairah, United Arab Emirates' ),
+				'addressLocality' => 'Dibba, Fujairah',
+				'addressCountry'  => 'AE',
+			),
+			'areaServed'  => $areas,
+			'openingHoursSpecification' => array(
+				array(
+					'@type'     => 'OpeningHoursSpecification',
+					'dayOfWeek' => array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ),
+					'opens'     => '00:00',
+					'closes'    => '23:59',
+				),
+			),
+			'priceRange'  => '$$',
+			'image'       => $image_url,
+			'description' => dbr_text(
+				'CAT 226B bobcat and skid steer loader rental with operator across the UAE from Dibba, Fujairah.',
+				'تأجير بوبكات وسكيد ستير لودر CAT 226B مع مشغل داخل الإمارات من دبا، الفجيرة.'
+			),
+		),
+		array(
+			'@type'       => 'Service',
+			'@id'         => $site_url . '#bobcat-rental-service',
+			'name'        => dbr_text( 'Bobcat rental UAE with operator', 'تأجير بوبكات في الإمارات مع مشغل' ),
+			'serviceType' => dbr_text( 'Bobcat and skid steer loader rental', 'تأجير بوبكات وسكيد ستير لودر' ),
+			'provider'    => array( '@id' => $site_url . '#business' ),
+			'areaServed'  => $areas,
+			'url'         => $current_url,
+			'description' => dbr_text(
+				'CAT 226B skid steer loader rental with operator for site cleaning, loading, grading, backfilling and compact material handling.',
+				'تأجير سكيد ستير لودر CAT 226B مع مشغل لتنظيف المواقع والتحميل والتسوية والردم ومناولة المواد.'
+			),
+		),
+		array(
+			'@type'      => is_home() ? 'CollectionPage' : 'WebPage',
+			'@id'        => $current_url . '#webpage',
+			'url'        => $current_url,
+			'name'       => $title,
+			'inLanguage' => $lang,
+			'isPartOf'   => array( '@id' => $site_url . '#website' ),
+			'about'      => array( '@id' => $site_url . '#bobcat-rental-service' ),
+		),
+	);
+
+	if ( is_singular( 'post' ) ) {
+		$graph[] = array(
+			'@type'            => 'BlogPosting',
+			'@id'              => $current_url . '#article',
+			'url'              => $current_url,
+			'headline'         => get_the_title(),
+			'description'      => get_the_excerpt(),
+			'datePublished'    => get_the_date( DATE_W3C ),
+			'dateModified'     => get_the_modified_date( DATE_W3C ),
+			'inLanguage'       => $lang,
+			'mainEntityOfPage' => array( '@id' => $current_url . '#webpage' ),
+			'author'           => array( '@id' => $site_url . '#business' ),
+			'publisher'        => array( '@id' => $site_url . '#business' ),
+			'image'            => $image_url,
+		);
+	}
+
+	if ( is_front_page() || is_singular( 'page' ) ) {
+		$graph[] = array(
+			'@type'      => 'FAQPage',
+			'@id'        => $current_url . '#faq',
+			'inLanguage' => $lang,
+			'mainEntity' => dbr_schema_faq_entities(),
+		);
+	}
 
 	$schema = array(
 		'@context' => 'https://schema.org',
-		'@graph'   => array(
-			array(
-				'@type'       => 'LocalBusiness',
-				'@id'         => $site_url . '#business',
-				'name'        => dbr_get_business_value( 'business_name', 'UAE Equipment Rental' ),
-				'legalName'   => dbr_get_business_value( 'legal_name', 'UAE Equipment Rental' ),
-				'url'         => $site_url,
-				'telephone'   => dbr_get_business_value( 'phone', '+971 54 738 8695' ),
-				'address'     => dbr_get_business_value( 'address', 'Headquarters: Dibba, Fujairah, United Arab Emirates' ),
-				'areaServed'  => $areas,
-				'openingHours'=> 'Mo-Su 00:00-23:59',
-				'priceRange'  => '$$',
-				'image'       => $image_url,
-				'description' => dbr_text(
-					'CAT 226B bobcat and skid steer loader rental with operator across the UAE from Dibba, Fujairah.',
-					'تأجير بوبكات وسكيد ستير لودر CAT 226B مع مشغل داخل الإمارات من دبا، الفجيرة.'
-				),
-			),
-			array(
-				'@type'       => 'Service',
-				'@id'         => $site_url . '#service',
-				'serviceType' => dbr_text( 'Bobcat rental UAE', 'تأجير بوبكات في الإمارات' ),
-				'provider'    => array( '@id' => $site_url . '#business' ),
-				'areaServed'  => $areas,
-				'description' => dbr_text(
-					'CAT 226B skid steer loader rental with operator for site cleaning, loading, grading, backfilling and material handling.',
-					'تأجير سكيد ستير لودر CAT 226B مع مشغل لتنظيف المواقع والتحميل والتسوية والردم ومناولة المواد.'
-				),
-			),
-			array(
-				'@type'      => 'FAQPage',
-				'@id'        => $site_url . '#faq',
-				'mainEntity' => array(
-					array(
-						'@type'          => 'Question',
-						'name'           => dbr_text( 'Is this a Bobcat or a skid steer loader?', 'هل هذه بوبكات أم سكيد ستير لودر؟' ),
-						'acceptedAnswer' => array(
-							'@type' => 'Answer',
-							'text'  => dbr_text( 'Many customers search for bobcat rental, but the available machine is a CAT 226B skid steer loader.', 'كثير من العملاء يبحثون عن تأجير بوبكات، لكن الآلة المتوفرة هي سكيد ستير لودر CAT 226B.' ),
-						),
-					),
-					array(
-						'@type'          => 'Question',
-						'name'           => dbr_text( 'Can I rent the machine with an operator?', 'هل يمكن استئجار الآلة مع مشغل؟' ),
-						'acceptedAnswer' => array(
-							'@type' => 'Answer',
-							'text'  => dbr_text( 'The bobcat is provided with an operator. Availability and delivery cost depend on date, job location and work type.', 'يتم توفير البوبكات مع مشغل. التوفر وتكلفة التوصيل يعتمدان على التاريخ وموقع العمل ونوع الخدمة.' ),
-						),
-					),
-				),
-			),
-		),
+		'@graph'   => $graph,
 	);
 
 	echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
@@ -625,6 +713,7 @@ function dbr_robots_txt( $output, $public ) {
 	$output  = "User-agent: *\n";
 	$output .= "Allow: /\n\n";
 	$output .= 'Sitemap: ' . home_url( '/sitemap_index.xml' ) . "\n";
+	$output .= 'Sitemap: ' . home_url( '/sitemap.xml' ) . "\n";
 
 	return $output;
 }
